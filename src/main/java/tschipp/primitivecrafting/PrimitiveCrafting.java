@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
 import tschipp.primitivecrafting.common.CommonProxy;
 
 @EventBusSubscriber
-@Mod(modid = PrimitiveCrafting.MODID, name = PrimitiveCrafting.NAME, version = PrimitiveCrafting.VERSION, dependencies = PrimitiveCrafting.DEPENDENCIES, acceptedMinecraftVersions = PrimitiveCrafting.ACCEPTED_VERSIONS, guiFactory = "tschipp.primitivecrafting.client.gui.GuiFactoryPrimitive", certificateFingerprint = "fd21553434f4905f2f73ea7838147ac4ea07bd88")
+@Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION, dependencies = PrimitiveCrafting.DEPENDENCIES, acceptedMinecraftVersions = PrimitiveCrafting.ACCEPTED_VERSIONS, guiFactory = "tschipp.primitivecrafting.client.gui.GuiFactoryPrimitive", certificateFingerprint = "fd21553434f4905f2f73ea7838147ac4ea07bd88")
 public class PrimitiveCrafting
 {
 
@@ -26,9 +26,8 @@ public class PrimitiveCrafting
 	@Instance(PrimitiveCrafting.MODID)
 	public static PrimitiveCrafting instance;
 
-	public static final String MODID = "primitivecrafting";
-	public static final String VERSION = "GRADLE:VERSION";
-	public static final String NAME = "Primitive Crafting";
+	public static final String MODID = Tags.MOD_ID;
+	public static final String NAME = Tags.MOD_NAME;
 	public static final String ACCEPTED_VERSIONS = "[1.12.2,1.13)";
 	public static final String DEPENDENCIES = "required-after:forge@[13.20.1.2386,);before:jei@[4.11.0.212,);after:recipestages";
 	public static final Logger LOGGER = LogManager.getFormatterLogger(MODID.toUpperCase());

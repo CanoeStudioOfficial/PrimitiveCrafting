@@ -24,6 +24,8 @@ public class CTIntegration
 {
 
 	private static int recipeCount = 0;
+	private static int toolRecipeCount = 0;
+	private static int shapelessRecipeCount = 0;
 
 	@ZenMethod
 	public static void addRecipe(IItemStack output, IIngredient a, IIngredient b, String registryName, String gamestage)
@@ -148,6 +150,70 @@ public class CTIntegration
 			List<IPrimitiveRecipe> recipes = RecipeRegistry.getRecipeForStack(stack);
 			
 			RecipeRegistry.removeAll(stack, recipes);
+		}
+	}
+
+	@ZenMethod
+	public static void addToolRecipe(IItemStack output, IIngredient input, IIngredient tool, int durabilityCost)
+	{
+		addToolRecipe(output, input, tool, durabilityCost, PrimitiveCrafting.MODID + ":tool_recipe_" + toolRecipeCount);
+		toolRecipeCount++;
+	}
+
+	@ZenMethod
+	public static void addToolRecipe(IItemStack output, IIngredient input, IIngredient tool, int durabilityCost, String registryName)
+	{
+		if (input != null && tool != null && output != null)
+		{
+			if (!(input instanceof ILiquidStack) && !(tool instanceof ILiquidStack))
+			{
+				ItemStack stackOutput = CraftTweakerMC.getItemStack(output);
+
+				int countInput = input.getAmount();
+				int countTool = tool.getAmount();
+
+				if (!stackOutput.isEmpty())
+				{
+					CTShapelessIngredient pInput = new CTShapelessIngredient(input, countInput);
+					CTToolIngredient pTool = new CTToolIngredient(tool, countTool, durabilityCost);
+
+					IPrimitiveRecipe recipe = new PrimitiveRecipe(stackOutput, pInput, pTool, new ResourceLocation(registryName));
+
+					RecipeRegistry.registerRecipe(recipe);
+				}
+			}
+		}
+	}
+
+	@ZenMethod
+	public static void addShapelessRecipe(IItemStack output, IIngredient a, IIngredient b)
+	{
+		addShapelessRecipe(output, a, b, PrimitiveCrafting.MODID + ":shapeless_recipe_" + shapelessRecipeCount);
+		shapelessRecipeCount++;
+	}
+
+	@ZenMethod
+	public static void addShapelessRecipe(IItemStack output, IIngredient a, IIngredient b, String registryName)
+	{
+		if (a != null && b != null && output != null)
+		{
+			if (!(a instanceof ILiquidStack) && !(b instanceof ILiquidStack))
+			{
+				ItemStack stackOutput = CraftTweakerMC.getItemStack(output);
+
+				int countA = a.getAmount();
+				int countB = b.getAmount();
+
+				if (!stackOutput.isEmpty())
+				{
+					CTShapelessIngredient pA = new CTShapelessIngredient(a, countA);
+					CTShapelessIngredient pB = new CTShapelessIngredient(b, countB);
+
+					IPrimitiveRecipe recipe = new PrimitiveRecipe(stackOutput, pA, pB, new ResourceLocation(registryName));
+
+					RecipeRegistry.registerRecipe(recipe);
+				}
+			}
 		}
 	}
 

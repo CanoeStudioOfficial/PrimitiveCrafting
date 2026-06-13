@@ -21,6 +21,7 @@ public class RecipeRegistry
 	private static Set<IPrimitiveRecipe> registry = new HashSet<IPrimitiveRecipe>();
 	private static HashMap<ResourceLocation, IPrimitiveRecipe> resourceRegistry = new HashMap<ResourceLocation, IPrimitiveRecipe>();
 	private static HashMap<String, List<IPrimitiveRecipe>> outputRegistry = new HashMap<String, List<IPrimitiveRecipe>>();
+	private static Set<ResourceLocation> bannedRecipes = new HashSet<ResourceLocation>();
 
 	public static void registerRecipe(IPrimitiveRecipe recipe)
 	{
@@ -100,13 +101,30 @@ public class RecipeRegistry
 
 		for (IPrimitiveRecipe r : registry)
 		{
-			if (r.isValid(a, b) && StageHelper.hasStage(player, r.getTier()))
+			if (r.isValid(a, b) && StageHelper.hasStage(player, r.getTier()) && !isBanned(r.getRegistryName()))
 				valids.add(r);
 		}
 
 		valids.sort((r1, r2) -> r1.getResult().getItem().getRegistryName().toString().compareTo(r2.getResult().getItem().getRegistryName().toString()));
 
 		return valids;
+	}
+
+	public static boolean isBanned(ResourceLocation name)
+	{
+		return bannedRecipes.contains(name);
+	}
+
+	public static void banRecipe(ResourceLocation name)
+	{
+		bannedRecipes.add(name);
+	}
+
+	public static void banRecipeForStack(ItemStack output)
+	{
+		List<IPrimitiveRecipe> recipes = getRecipeForStack(output);
+		for (IPrimitiveRecipe r : recipes)
+			bannedRecipes.add(r.getRegistryName());
 	}
 
 	public static IPrimitiveRecipe getRecipe(ResourceLocation name)

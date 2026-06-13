@@ -154,6 +154,22 @@ public class CTIntegration
 	}
 
 	@ZenMethod
+	public static void banRecipe(String recipeName)
+	{
+		RecipeRegistry.banRecipe(new ResourceLocation(recipeName));
+	}
+
+	@ZenMethod
+	public static void banRecipeForStack(IItemStack stack)
+	{
+		if (stack != null)
+		{
+			ItemStack mcstack = CraftTweakerMC.getItemStack(stack);
+			RecipeRegistry.banRecipeForStack(mcstack);
+		}
+	}
+
+	@ZenMethod
 	public static void addToolRecipe(IItemStack output, IIngredient input, IIngredient tool, int durabilityCost)
 	{
 		addToolRecipe(output, input, tool, durabilityCost, PrimitiveCrafting.MODID + ":tool_recipe_" + toolRecipeCount);

@@ -22,6 +22,7 @@ public class RecipeRegistry
 	private static HashMap<ResourceLocation, IPrimitiveRecipe> resourceRegistry = new HashMap<ResourceLocation, IPrimitiveRecipe>();
 	private static HashMap<String, List<IPrimitiveRecipe>> outputRegistry = new HashMap<String, List<IPrimitiveRecipe>>();
 	private static Set<ResourceLocation> bannedRecipes = new HashSet<ResourceLocation>();
+	private static boolean disableAutoRegistration = false;
 
 	public static void registerRecipe(IPrimitiveRecipe recipe)
 	{
@@ -132,6 +133,7 @@ public class RecipeRegistry
 		registry.clear();
 		resourceRegistry.clear();
 		outputRegistry.clear();
+		disableAutoRegistration = true;
 	}
 
 	public static IPrimitiveRecipe getRecipe(ResourceLocation name)
@@ -150,6 +152,9 @@ public class RecipeRegistry
 
 	public static void regRecipes()
 	{
+		if (disableAutoRegistration)
+			return;
+
 		if (PrimitiveConfig.Settings.useDefaultCraftingRecipes)
 		{
 			for (IRecipe recipe : ForgeRegistries.RECIPES)

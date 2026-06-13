@@ -170,6 +170,12 @@ public class CTIntegration
 	}
 
 	@ZenMethod
+	public static void removeAllRecipes()
+	{
+		RecipeRegistry.clearAllRecipes();
+	}
+
+	@ZenMethod
 	public static void addToolRecipe(IItemStack output, IIngredient input, IIngredient tool, int durabilityCost)
 	{
 		addToolRecipe(output, input, tool, durabilityCost, PrimitiveCrafting.MODID + ":tool_recipe_" + toolRecipeCount);

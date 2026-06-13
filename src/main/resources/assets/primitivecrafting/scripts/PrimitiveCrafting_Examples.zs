@@ -90,6 +90,9 @@ mods.primitivecrafting.banRecipeForStack(<minecraft:planks:*>);
 // 按产出物品移除所有相关配方
 // mods.primitivecrafting.removeRecipeForStack(<产出>);
 
+// 删除所有原始合成配方 (清空全部)
+// mods.primitivecrafting.removeAllRecipes();
+
 // ----------------------------------------------------------------------------
 // 六、GameStage 阶段控制 (需要 RecipeStages 模组)
 // ----------------------------------------------------------------------------

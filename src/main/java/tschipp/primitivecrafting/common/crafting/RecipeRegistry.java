@@ -127,6 +127,13 @@ public class RecipeRegistry
 			bannedRecipes.add(r.getRegistryName());
 	}
 
+	public static void clearAllRecipes()
+	{
+		registry.clear();
+		resourceRegistry.clear();
+		outputRegistry.clear();
+	}
+
 	public static IPrimitiveRecipe getRecipe(ResourceLocation name)
 	{
 		return resourceRegistry.get(name);

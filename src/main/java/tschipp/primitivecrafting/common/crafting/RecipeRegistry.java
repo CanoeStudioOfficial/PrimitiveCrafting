@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import tschipp.primitivecrafting.common.config.PrimitiveConfig;
-import tschipp.primitivecrafting.common.helper.ListHandler;
 import tschipp.primitivecrafting.common.helper.StageHelper;
 
 import java.lang.reflect.Method;
@@ -159,9 +158,6 @@ public class RecipeRegistry
 		{
 			for (IRecipe recipe : ForgeRegistries.RECIPES)
 			{
-				if (PrimitiveConfig.Settings.useWhitelist ? !ListHandler.isAllowed(recipe) : ListHandler.isForbidden(recipe))
-					continue;
-
 				NonNullList<Ingredient> ingredients = recipe.getIngredients();
 
 				if (ingredients.size() == 2)

@@ -40,9 +40,7 @@ repositories {
 		url "https://maven.blamejared.com/"
 	}
 	
-	maven {
-        url 'https://maven.mcmoddev.com'
-    }
+
     mavenLocal() // Must be last for caching to work
 }
 
@@ -54,8 +52,8 @@ dependencies {
 
     implementation 'mezz.jei:jei_1.12.2:4.11.0.212:api'
     implementation 'mezz.jei:jei_1.12.2:4.11.0.212'
-    implementation "net.darkhax.gamestages:GameStages-1.12.2:2.0.90"
-    implementation "net.darkhax.bookshelf:Bookshelf-1.12.2:2.3.+"
+    implementation rfg.deobf("curse.maven:game-stages-268655:2951840")
+    implementation rfg.deobf("curse.maven:bookshelf-228525:2836960")
     implementation "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.715"
 
     // Example - Dependency descriptor:
